@@ -15,7 +15,7 @@ $auth->processResponse();
 $errors = $auth->getErrors();
 
 if (!empty($errors)) {
-    echo '<p>', htmlentities(implode(', ', $errors)), '</p>';
+    echo '<p>', esc_attr(implode(', ', $errors)), '</p>';
     exit();
 }
 
@@ -26,7 +26,7 @@ if (!$auth->isAuthenticated()) {
 
 $_SESSION['samlUserdata'] = $auth->getAttributes();
 $_SESSION['IdPSessionIndex'] = $auth->getSessionIndex();
-if (isset($_POST['RelayState']) && OneLogin_Saml2_Utils::getSelfURL() != $_POST['RelayState']) {
+if (isset($_POST['RelayState']) && OneLogin_Saml2_Utils::getSelfURL() != $_POST['RelayState'] && wp_verify_nonce(isset($_SERVER['nonce']),'RelayState')) {
     // To avoid 'Open Redirect' attacks, before execute the
     // redirection confirm the value of $_POST['RelayState'] is a // trusted URL.
     $auth->redirectTo($_POST['RelayState']);
@@ -38,15 +38,15 @@ if (!empty($attributes)) {
     echo '<h1>'._('User attributes:').'</h1>';
     echo '<table><thead><th>'._('Name').'</th><th>'._('Values').'</th></thead><tbody>';
     foreach ($attributes as $attributeName => $attributeValues) {
-        echo '<tr><td>'.htmlentities($attributeName).'</td><td><ul>';
+        echo '<tr><td>'.esc_attr($attributeName).'</td><td><ul>';
         foreach ($attributeValues as $attributeValue) {
-            echo '<li>'.htmlentities($attributeValue).'</li>';
+            echo '<li>'.esc_attr($attributeValue).'</li>';
         }
         echo '</ul></td></tr>';
     }
     echo '</tbody></table>';
     if (!empty($_SESSION['IdPSessionIndex'])) {
-        echo '<p>The SessionIndex of the IdP is: '.htmlentities($_SESSION['IdPSessionIndex']).'</p>';
+        echo '<p>The SessionIndex of the IdP is: '.esc_attr($_SESSION['IdPSessionIndex']).'</p>';
     }
 } else {
     echo _('Attributes not found');
