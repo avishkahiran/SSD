@@ -33,5 +33,6 @@ try {
         echo 'Invalid SAML response.';
     }
 } catch (Exception $e) {
+    //fixed by IT20142650
     echo 'Invalid SAML response: ' . esc_attr($e)->getMessage();
 }

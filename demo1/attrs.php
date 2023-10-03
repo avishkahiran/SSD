@@ -3,6 +3,7 @@
 session_start();
 
 if (isset($_SESSION['samlUserdata'])) {
+    //fixed by IT20142650
     $attributes = $_SESSION['samlUserdata'];
     if (!empty($attributes)) {
         echo 'You have the following attributes:<br>';
