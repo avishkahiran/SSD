@@ -44,6 +44,7 @@ if (!empty($attributes)) {
         }
         echo '</ul></td></tr>';
     }
+    //Fixed By IT20150266
     echo '</tbody></table>';
     if (!empty($_SESSION['IdPSessionIndex'])) {
         echo '<p>The SessionIndex of the IdP is: '.esc_attr($_SESSION['IdPSessionIndex']).'</p>';
