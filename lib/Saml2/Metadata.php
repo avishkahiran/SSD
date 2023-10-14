@@ -212,7 +212,7 @@ METADATA_TEMPLATE;
                 throw new Exception('Error parsing metadata');
             }
         } catch (Exception $e) {
-            throw new Exception('Error parsing metadata. '.$e->getMessage());
+            throw new Exception('Error parsing metadata. '.esc_attr($e->getMessage()));
         }
 
         $formatedCert = OneLogin_Saml2_Utils::formatCert($cert, false);

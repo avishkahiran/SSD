@@ -24,7 +24,7 @@ $samlResponse = new OneLogin_Saml_Response($settings, $_POST['SAMLResponse']);
 
 try {
     if ($samlResponse->isValid()) {
-        echo 'You are: ' . $samlResponse->getNameId() . '<br>';
+        echo 'You are: ' . esc_attr($samlResponse->getNameId()) . '<br>';
         $attributes = $samlResponse->getAttributes();
         if (!empty($attributes)) {
             echo 'You have the following attributes:<br>';

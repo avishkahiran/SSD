@@ -113,7 +113,7 @@ class OneLogin_Saml2_Settings
                 throw new OneLogin_Saml2_Error(
                     'Invalid file settings: %s',
                     OneLogin_Saml2_Error::SETTINGS_INVALID,
-                    array(implode(', ', $this->_errors))
+                    array(implode(', ', esc_attr($this->_errors)))
                 );
             }
             $this->_addDefaultValues();

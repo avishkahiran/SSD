@@ -25,9 +25,9 @@ try {
                 echo 'You have the following attributes:<br>';
                 echo '<table><thead><th>Name</th><th>Values</th></thead><tbody>';
                 foreach ($attributes as $attributeName => $attributeValues) {
-                    echo '<tr><td>' . htmlentities($attributeName) . '</td><td><ul>';
+                    echo '<tr><td>' . esc_html($attributeName) . '</td><td><ul>';
                     foreach ($attributeValues as $attributeValue) {
-                        echo '<li>' . htmlentities($attributeValue) . '</li>';
+                        echo '<li>' . esc_html($attributeValue) . '</li>';
                     }
                     echo '</ul></td></tr>';
                 }
@@ -40,5 +40,5 @@ try {
         echo 'No SAML Response found in POST.';
     }
 } catch (Exception $e) {
-    echo 'Invalid SAML Response: ' . htmlentities($e->getMessage());
+    echo 'Invalid SAML Response: ' . esc_attr($e->getMessage());
 }

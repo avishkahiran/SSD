@@ -37,8 +37,8 @@ if (isset($_POST['RelayState']) && OneLogin_Saml2_Utils::getSelfURL() != $_POST[
 $attributes = $_SESSION['samlUserdata'];
 
 if (!empty($attributes)) {
-    echo '<h1>'._('User attributes:').'</h1>';
-    echo '<table><thead><th>'._('Name').'</th><th>'._('Values').'</th></thead><tbody>';
+    echo '<h1>'.esc_html__('User attributes:').'</h1>';
+    echo '<table><thead><th>'.esc_html__('Name').'</th><th>'.esc_html__('Values').'</th></thead><tbody>';
     foreach ($attributes as $attributeName => $attributeValues) {
         //fixed by IT20150266
         echo '<tr><td>'.esc_attr($attributeName).'</td><td><ul>';
