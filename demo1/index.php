@@ -11,6 +11,7 @@ require_once 'settings.php';
 
 $auth = new OneLogin_Saml2_Auth($settingsInfo);
 
+//IT20150266
 if (isset($_GET['sso'])) {
     $auth->login();
 
