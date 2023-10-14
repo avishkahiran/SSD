@@ -184,7 +184,7 @@ class OneLogin_Saml2_LogoutResponse
                     }
                 }
 
-                if ($security['wantMessagesSigned'] && !isset($_GET['Signature'])) {
+                if ($security['wantMessagesSigned'] && !isset($_GET['Signature']) && wp_verify_nonce($_GET['Signature'])) {
                     throw new OneLogin_Saml2_ValidationError(
                         "The Message of the Logout Response is not signed and the SP requires it",
                         OneLogin_Saml2_ValidationError::NO_SIGNED_MESSAGE
@@ -192,7 +192,7 @@ class OneLogin_Saml2_LogoutResponse
                 }
             }
 
-            if (isset($_GET['Signature'])) {
+            if (isset($_GET['Signature']) && wp_verify_nonce($_GET['Signature'])) {
                 $signatureValid = OneLogin_Saml2_Utils::validateBinarySign("SAMLResponse", $_GET, $idpData, $retrieveParametersFromServer);
                 if (!$signatureValid) {
                     throw new OneLogin_Saml2_ValidationError(
