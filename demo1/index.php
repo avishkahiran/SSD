@@ -12,7 +12,7 @@ require_once 'settings.php';
 $auth = new OneLogin_Saml2_Auth($settingsInfo);
 
 //IT20150266
-if (isset($_GET['sso'])) {
+if (isset($_GET['sso']) && wp_verify_nonce($_GET['sso'])) {
     $auth->login();
 
     # If AuthNRequest ID need to be saved in order to later validate it, do instead
