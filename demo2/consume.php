@@ -19,7 +19,7 @@ try {
         $samlSettings = new OneLogin_Saml2_Settings();
         $samlResponse = new OneLogin_Saml2_Response($samlSettings, $_POST['SAMLResponse']);
         if ($samlResponse->isValid()) {
-            echo 'You are: ' . htmlentities($samlResponse->getNameId()) . '<br>';
+            echo 'You are: ' . esc_attr($samlResponse->getNameId()) . '<br>';
             $attributes = $samlResponse->getAttributes();
             if (!empty($attributes)) {
                 echo 'You have the following attributes:<br>';

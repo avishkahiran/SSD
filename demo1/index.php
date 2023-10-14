@@ -75,7 +75,7 @@ if (isset($_GET['sso'])) {
     if (!empty($errors)) {
         echo '<p>',implode(', ', $errors),'</p>';
         if ($auth->getSettings()->isDebugActive()) {
-            echo '<p>'.htmlentities($auth->getLastErrorReason()).'</p>';
+            echo '<p>'.esc_attr($auth->getLastErrorReason()).'</p>';
         }
     }
 
@@ -108,9 +108,9 @@ if (isset($_GET['sso'])) {
     if (empty($errors)) {
         echo '<p>Sucessfully logged out</p>';
     } else {
-        echo '<p>', htmlentities(implode(', ', $errors)), '</p>';
+        echo '<p>', esc_attr(implode(', ', $errors)), '</p>';
         if ($auth->getSettings()->isDebugActive()) {
-            echo '<p>'.htmlentities($auth->getLastErrorReason()).'</p>';
+            echo '<p>'.esc_attr($auth->getLastErrorReason()).'</p>';
         }
     }
 }
@@ -121,9 +121,9 @@ if (isset($_SESSION['samlUserdata'])) {
         echo 'You have the following attributes:<br>';
         echo '<table><thead><th>Name</th><th>Values</th></thead><tbody>';
         foreach ($attributes as $attributeName => $attributeValues) {
-            echo '<tr><td>' . htmlentities($attributeName) . '</td><td><ul>';
+            echo '<tr><td>' . esc_attr($attributeName) . '</td><td><ul>';
             foreach ($attributeValues as $attributeValue) {
-                echo '<li>' . htmlentities($attributeValue) . '</li>';
+                echo '<li>' . esc_attr($attributeValue) . '</li>';
             }
             echo '</ul></td></tr>';
         }
