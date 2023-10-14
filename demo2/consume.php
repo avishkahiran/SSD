@@ -10,12 +10,7 @@
 require_once '../_toolkit_loader.php';
 
 try {
-    if (isset($_POST['SAMLResponse'])){
-        if(inset($_POST['SAMLResponse'])
-        
-        && wp_verify_nonce(sanitize_key($_POST['SAMLResponse']),'SAMLResponse_action')
-    ) /*end edit*/ 
-
+    if (isset($_POST['SAMLResponse']) && wp_verify_nonce(isset($_SERVER['nonce']),'SAMLResponse')) { 
         $samlSettings = new OneLogin_Saml2_Settings();
         $samlResponse = new OneLogin_Saml2_Response($samlSettings, $_POST['SAMLResponse']);
         if ($samlResponse->isValid()) {
@@ -25,9 +20,9 @@ try {
                 echo 'You have the following attributes:<br>';
                 echo '<table><thead><th>Name</th><th>Values</th></thead><tbody>';
                 foreach ($attributes as $attributeName => $attributeValues) {
-                    echo '<tr><td>' . esc_html($attributeName) . '</td><td><ul>';
+                    echo '<tr><td>' . esc_attr($attributeName) . '</td><td><ul>';
                     foreach ($attributeValues as $attributeValue) {
-                        echo '<li>' . esc_html($attributeValue) . '</li>';
+                        echo '<li>' . esc_attr($attributeValue) . '</li>';
                     }
                     echo '</ul></td></tr>';
                 }
